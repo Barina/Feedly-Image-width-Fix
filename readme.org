@@ -7,7 +7,8 @@ A simple fix for images in feedly.com that takes too much space making it hard t
 
 #+HTML: </div>
 
-License:
-CC0 1.0 Universal (CC0 1.0)
-Public Domain Dedication
-https://creativecommons.org/publicdomain/zero/1.0/
+
+
+** License:
+Code released under CC0 1.0 Universal ([[https://creativecommons.org/publicdomain/zero/1.0/][CC0 1.0]])
+\Public Domain Dedication license.
