@@ -1,8 +1,10 @@
 /* ==UserStyle==
 @name           feedly.com image overflow fix
 @namespace      github.com/Barina/Feedly-Image-width-Fix
-@version        1.0.2
+@version        1.0.3
 @description    A simple fix for images in feedly.com that takes too much space making it hard to read the content in article view.
+@homepageURL    https://github.com/Barina/Feedly-Image-width-Fix
+@updateURL      https://github.com/Barina/Feedly-Image-width-Fix/raw/master/feedlyfix.user.styl
 @author         Roy Barina
 @license        CC0-1.0
 @preprocessor   stylus
