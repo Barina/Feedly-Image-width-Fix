@@ -1,4 +1,4 @@
-<img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Feedly_Logo.svg" width="96" height="86.4"/>
+<p align="center"><img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Feedly_Logo.svg" width="96" height="86.4"/></p>
 
 # Feedly Image Width Fix
 A simple fix for images in feedly.com that takes too much space making it hard to read the content in article view.
