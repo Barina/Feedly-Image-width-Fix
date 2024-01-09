@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           feedly.com image overflow fix
 @namespace      github.com/Barina/Feedly-Image-width-Fix
-@version        1.1.0
+@version        1.2.0
 @description    A simple fix for images in feedly.com that takes too much space making it hard to read the content in article view.
 @homepageURL    https://github.com/Barina/Feedly-Image-width-Fix
 @updateURL      https://github.com/Barina/Feedly-Image-width-Fix/raw/master/feedlyfix.user.styl
@@ -9,6 +9,7 @@
 @license        MIT
 @preprocessor   stylus
 
+@var checkbox hide-top-header                   'Hides top header (with the Upgrade button).' 1
 @var range max-image-width                      'Maximum width of articles images.' [40, 5, 95, 1, "%"]
 @var checkbox hide-share-bar                    'Hides the share toolbar on top of articles.' 1
 @var checkbox hide-bottom-bar                   'Hides the toolbar on the bottom of articles.' 1
@@ -16,6 +17,11 @@
 ==/UserStyle== */
 
 @-moz-document url-prefix("https://feedly.com/") {
+    
+    if(hide-top-header){
+        #topHeaderBarFX{ display: none; }
+    }
+        
     #image1
     .content > div > div > div > a > img
     .content > div > div > a > img{
