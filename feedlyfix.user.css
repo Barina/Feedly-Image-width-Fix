@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           feedly.com image overflow fix
 @namespace      github.com/Barina/Feedly-Image-width-Fix
-@version        1.2.0
+@version        1.3.0
 @description    A simple fix for images in feedly.com that takes too much space making it hard to read the content in article view.
 @homepageURL    https://github.com/Barina/Feedly-Image-width-Fix
 @updateURL      https://github.com/Barina/Feedly-Image-width-Fix/raw/master/feedlyfix.user.styl
@@ -13,6 +13,8 @@
 @var range max-image-width                      'Maximum width of articles images.' [40, 5, 95, 1, "%"]
 @var checkbox hide-share-bar                    'Hides the share toolbar on top of articles.' 1
 @var checkbox hide-bottom-bar                   'Hides the toolbar on the bottom of articles.' 1
+@var range bg-opacity                           'Opacity of the background of side opened articles.' [.65, 0, 1, .01]
+@var range bg-blur                              'Blur intensity of the background of side opened articles.' [10, 0, 25, 1, "px"]
 
 ==/UserStyle== */
 
@@ -35,5 +37,18 @@
         
     if(hide-bottom-bar){            
         div:has( > div > .Article__button) { display: none; }
-    }    
+    }
+    
+    .theme--dark .entry-overlay{
+        background-color: rgba(0, 0, 0, bg-opacity);
+        backdrop-filter: blur(bg-blur);
+    }
+    
+    .theme--dark .SliderTabGraphic{
+        filter: drop-shadow(0 1px 20px rgba(0, 0, 0, 1));
+    }
+    
+    .theme--dark .Slider--current{
+        box-shadow: 0 1px 100px rgba(0, 0, 0, 1);
+    }        
 }
