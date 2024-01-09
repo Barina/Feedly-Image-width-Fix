@@ -9,5 +9,4 @@ A simple fix for images in feedly.com that takes too much space making it hard t
 ![alt text](https://github.com/Barina/Feedly-Image-width-Fix/blob/master/screenshot.png?raw=true)
 
 ### License:
-Code released under CC0 1.0 Universal ([CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/))<br/>
-Public Domain Dedication license.
+Code released under the [MIT License](https://opensource.org/license/mit/).
