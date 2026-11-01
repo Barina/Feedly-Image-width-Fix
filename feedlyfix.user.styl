@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           feedly.com image overflow fix
 @namespace      github.com/Barina/Feedly-Image-width-Fix
-@version        1.3.0
+@version        1.5.0
 @description    A simple fix for images in feedly.com that takes too much space making it hard to read the content in article view.
 @homepageURL    https://github.com/Barina/Feedly-Image-width-Fix
 @updateURL      https://github.com/Barina/Feedly-Image-width-Fix/raw/master/feedlyfix.user.styl
@@ -9,8 +9,12 @@
 @license        MIT
 @preprocessor   stylus
 
+@var checkbox force-rtl                         'Force RTL in articles.' 1
 @var checkbox hide-top-header                   'Hides top header (with the Upgrade button).' 1
-@var range max-image-width                      'Maximum width of articles images.' [40, 5, 95, 1, "%"]
+@var range image-width                          'Width of articles images.' [40, 5, 95, 1, "%"]
+@var range image-border-radius                  'Radius of articles images roundness.' [10, 0, 50, 1, "px"]
+@var range image-border-thickness               'Thickness of articles images border.' [.09, 0, 5, .01, "rem"]
+@var range article-border-radius                'Radius of articles roundness.' [20, 0, 200, 1, "px"]
 @var checkbox hide-share-bar                    'Hides the share toolbar on top of articles.' 1
 @var checkbox hide-bottom-bar                   'Hides the toolbar on the bottom of articles.' 1
 @var range bg-opacity                           'Opacity of the background of side opened articles.' [.65, 0, 1, .01]
@@ -18,37 +22,68 @@
 
 ==/UserStyle== */
 
-@-moz-document url-prefix("https://feedly.com/") {
-    
-    if(hide-top-header){
-        #topHeaderBarFX{ display: none; }
-    }
-        
-    #image1
+@-moz-document url-prefix("https://feedly.com/")
+
+    if hide-top-header
+        #topHeaderBarFX
+          display none
+
+    // Image floats inside the text; text wraps beside it and under it
+    .content
+        display flow-root  // contain the float so tall images don't spill out
+
+    .content > div > div > div:has(> a > img)
+    .content > div > div > div:has(> a > span > img)
+    .content > div > div > a:has(> img)
+        float inline-start  // right in RTL, left in LTR
+        max-width image-width
+        min-width image-width
+        margin-block 0 .5rem
+        margin-inline 0 1rem
+        margin-top .5rem
+
     .content > div > div > div > a > img
-    .content > div > div > a > img{
-        max-width: max-image-width !important;
-    }
-    
-    if(hide-share-bar){
-        #image1{ margin: 1rem 0rem 1rem 1rem !important; }    
-        .shareBarHolder { display: none; }
-    }
+    .content > div > div > div > a > span > img
+    .content > div > div > a > img
+        float none !important  // override Feedly's inline styles
+        display block !important
+        max-width 100% !important
+        height auto !important
+        margin 0 !important
+        border-radius image-border-radius !important
+        border image-border-thickness solid var(--semanticColorBorderLight) !important
+
+    .SelectedEntryScroller > .InlineArticle
+      border-radius article-border-radius
         
-    if(hide-bottom-bar){            
-        div:has( > div > .Article__button) { display: none; }
-    }
+    if hide-share-bar
+        .shareBarHolder
+          display none
+        .entryBody
+          margin-top .5rem
+
+    if hide-bottom-bar
+        div:has( > div > .Article__button)
+          display none
+
+    .SidePeek__page-overlay
+    .theme--dark .entry-overlay
+        background-color rgba(0, 0, 0, bg-opacity) !important
+        backdrop-filter blur(bg-blur)
+
+    .theme--dark .SidePeekTabGraphic
+    .theme--dark .SidePeek--current
+    .theme--dark .SliderTabGraphic
+        filter drop-shadow(0 1px 20px rgba(0, 0, 0, 1)) !important
+        box-shadow 0 1px 15px rgba(0,0,0,.15)
+
+    .theme--dark .Slider--current
+        box-shadow 0 1px 100px rgba(0, 0, 0, 1)
+
+    if force-rtl
+      // Forcing RTL in articles
+      .entryHeader > .ArticleTitle // title
+      .content // body
+      .SelectedEntryScroller > .InlineArticle > div > .Article > .entryholder > div > .entryBody > div > .content > div > div // body
+        direction rtl !important
     
-    .theme--dark .entry-overlay{
-        background-color: rgba(0, 0, 0, bg-opacity);
-        backdrop-filter: blur(bg-blur);
-    }
-    
-    .theme--dark .SliderTabGraphic{
-        filter: drop-shadow(0 1px 20px rgba(0, 0, 0, 1));
-    }
-    
-    .theme--dark .Slider--current{
-        box-shadow: 0 1px 100px rgba(0, 0, 0, 1);
-    }        
-}
